@@ -4,8 +4,15 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("Yello Word!")
+    return HttpResponse("""Тестовое задание: Веб-сервис для управления движением денежных средств (ДДС)\n Таблица с записями о ДДС.
+■ Фильтры по дате, статусу, типу, категории и подкатегории.""")
 
-def about(request):
-    return HttpResponse("About us")
+def directory_management(request):
+    return HttpResponse("""Добавление, редактирование и удаление статусов, типов,
+категорий и подкатегорий, а также установление необходимых
+зависимостей.""")
 
+def creat_edit_entry(request):
+    return HttpResponse("""■ Форма для ввода данных.
+■ Поле выбора категорий, автоматически фильтрующее
+подкатегории на основе выбранной категории.""")
