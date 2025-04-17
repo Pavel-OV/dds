@@ -1,4 +1,7 @@
-from django.shortcuts import render
+ 
+from django.shortcuts import render, redirect
+from .forms import Status
+from .models import Status
 
 # Create your views here.
 from django.http import HttpResponse
@@ -20,14 +23,25 @@ def index(request):
 
     return render(request, "site_ddsapp/index.html", {'recipes_carussel': max_len})
 
-def edit_page(request):
-      max_len = 25
-      return render(request, "site_ddsapp/index.html", {'recipes_carussel': max_len})
+# def edit_page(request):
+#       max_len = 25
+#       return render(request, "site_ddsapp/index.html", {'recipes_carussel': max_len})
 
 #      return HttpResponse("""Добавление, редактирование и удаление статусов, типов,
 # категорий и подкатегорий, а также установление необходимых
 # зависимостей.""")
-
+def create_status(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        new_status = Status.objects.create(name=name)
+        message = 'Статус добавлен'
+        return render('site_ddsapp/list_status.html', {'form': new_status, 'message': message})  # перенаправление на страницу со списком
+    else:
+        return render(request, 'site_ddsapp/create_status.html')
+    
+def list_status(request):
+    status = Status.objects.all()
+    return render(request, 'list_status.html', {'status': status})
 
 def create_page(request):
      return HttpResponse("""Добавление, редактирование и удаление статусов, типов,
@@ -39,7 +53,12 @@ def directory_management(request):
 категорий и подкатегорий, а также установление необходимых
 зависимостей.""")
 
-# def creat_edit_entry(request):
+def edit_page(request):
+    max_len = 2
+    return render(request, "site_ddsapp/index.html", {'recipes_carussel': max_len})
 #     return HttpResponse("""■ Форма для ввода данных.
 # ■ Поле выбора категорий, автоматически фильтрующее
 # подкатегории на основе выбранной категории.""")
+
+def directory_management(request):
+    return render(request, 'site_ddsapp/directory_management.html')
