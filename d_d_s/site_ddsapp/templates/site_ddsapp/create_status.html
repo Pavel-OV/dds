@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %} Страница создания статуса:{% endblock %}
+
+{% block content %}
+<h3>{{ status.id }} ппопорррр</h3>
+<table class="table">
+    <thead>
+        
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Название статуса</th>        
+        <th>
+            <form method="POST">
+            {% csrf_token %}            
+            <input type="text" id="id_name" name="name" required>
+            <button type="submit">Создать статус</button>
+            </form>
+        </th>
+       </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+       <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+<p>Страница создания статуса:</p>
+<form method="POST">
+    {% csrf_token %}
+    <label for="'id_name">Название статуса</label>
+    <input type="text" id="id_name" name="name" required>
+    <button type="submit">Создать статус</button>
+</form>
+
+{% endblock %}

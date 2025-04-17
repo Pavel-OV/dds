@@ -4,6 +4,12 @@
 
 {% block content %}
 <p>Страница создания записи:</p>
+<form method="POST" action="{% url 'create_page' %}">
+    {% csrf_token %}
+    <label for="'id_name">Название статуса</label>
+    <input type="text" id="id_name" name="name" required>
+    <button type="submit">Создать статус</button>
+</form>
 <!-- <section >
     <div class="carousel">
 
