@@ -1,7 +1,7 @@
  
 from django.shortcuts import render, redirect
 from .forms import Status
-from .models import Status
+from .models import Status, Type, Category
 
 # Create your views here.
 from django.http import HttpResponse
@@ -32,26 +32,52 @@ def index(request):
 # зависимостей.""")
 def create_status(request):
     if request.method == 'POST':
+        status = Status.objects.all()
         name = request.POST['name']
         new_status = Status.objects.create(name=name)
-        message = 'Статус добавлен'
-        return render('site_ddsapp/list_status.html', {'form': new_status, 'message': message})  # перенаправление на страницу со списком
+        message = ' - статус добавлен'
+        return render(request,'site_ddsapp/list_status.html', {'items':status, 'imtes': Status.objects.all(),' message': message})  # перенаправление на страницу со списком
     else:
         return render(request, 'site_ddsapp/create_status.html')
     
+def create_type(request):
+    if request.method == 'POST':
+        status = Type.objects.all()
+        name = request.POST['name']
+        new_type = Type.objects.create(name=name)
+        message = ' - тип добавлен'
+        return render(request, 'site_ddsapp/list_status.html', {'items':status, 'imtes':Type.objects.all(), 'message': message})  # перенаправление на страницу со списком
+    else:
+        return render(request, 'site_ddsapp/create_type.html')
+    
+def create_category(request):
+    if request.method == 'POST':
+        status = Category.objects.all()
+        name = request.POST['name']
+        new_category = Category.objects.create(name=name)
+        message = ' - категория добавлена'
+        return render(request, 'site_ddsapp/list_status.html', {'items':status, 'imtes':Category.objects.all(), 'message': message})  # перенаправление на страницу со списком
+    else:
+        return render(request, 'site_ddsapp/create_category.html')
+    
 def list_status(request):
     status = Status.objects.all()
-    return render(request, 'list_status.html', {'status': status})
+    return render(request, 'site_ddsapp/list_status.html', {'items': status})
+
+def list_type(request):
+    status = Type.objects.all()
+    return render(request, 'site_ddsapp/list_status.html', {'items': status})
+
+def list_category(request):
+    status = Category.objects.all()
+    return render(request, 'site_ddsapp/list_status.html', {'items': status})
+
 
 def create_page(request):
      return HttpResponse("""Добавление, редактирование и удаление статусов, типов,
 категорий и подкатегорий, а также установление необходимых
 зависимостей.""")
 
-def directory_management(request):
-    return HttpResponse("""Добавление, редактирование и удаление статусов, типов,
-категорий и подкатегорий, а также установление необходимых
-зависимостей.""")
 
 def edit_page(request):
     max_len = 2
