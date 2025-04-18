@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %} Страница создания категории:{% endblock %}
+
+{% block content %}
+
+<h3>Страница создания категории</h3>
+
+{% for item in items %}
+<tr>
+    <th scope="row">{{ item.pk }}</th>
+    <th scope="row">{{ item.name}}</th>
+</tr>
+
+{% endfor %}
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="'id_name">Название категории</label>
+    <input type="text" id="id_name" name="name" required>
+    <button type="submit">Создать категории</button>
+</form>
+
+{% for stat in items %}
+
+   <p> {{ stat.pk }}</p>
+    <p>{{ stat.name}}</p>
+    {% empty %}
+    <p>Нет доступных статусов.</p>
+
+
+{% endfor %}
+
+{% endblock %}

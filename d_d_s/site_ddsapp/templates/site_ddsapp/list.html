@@ -7,12 +7,7 @@
 
 
 <!-- categories.html -->
-<h1> База данных  {% if message %}
-    
-        {{ message }}
-    </div>
-{% endif %}
-</h1>
+<h1>Список категорий</h1>
 {% for item in items %}
 
    <p> {{ item.pk }}    {{ item.name}}</p>

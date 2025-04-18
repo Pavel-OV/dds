@@ -4,11 +4,21 @@
 
 {% block content %}
 
+<h3>Страница создания типа</h3>
+
+{% for item in items %}
+<tr>
+    <th scope="row">{{ item.pk }}</th>
+    <th scope="row">{{ item.name}}</th>
+</tr>
+
+{% endfor %}
+
 <form method="POST">
     {% csrf_token %}
-    <label for="'id_name">Создание статуса</label>
+    <label for="'id_name">Название статуса</label>
     <input type="text" id="id_name" name="name" required>
-    <button type="submit">Создать статус</button>
+    <button type="submit">Создать тип</button>
 </form>
 
 {% for stat in items %}
